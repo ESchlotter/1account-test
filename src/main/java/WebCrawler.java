@@ -1,5 +1,4 @@
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -23,7 +22,6 @@ public class WebCrawler {
 
         // Multi threading via parallelStream
         elements.parallelStream().forEach(link -> {
-            String title = link.text();
             String url = link.absUrl("href");
 
             if (url.startsWith(relatedUrl)) {
@@ -49,7 +47,9 @@ public class WebCrawler {
         }
         Elements scriptElements = doc.getElementsByTag("script");
         for (Element element : scriptElements ){
-            // May need to get dom to actually find out libraries
+            // May need to get dom later on to actually find out libraries
+            // Could get libraries from the src= but that's not reliable especially when only using JSoup.
+            // I should use JSoup with other libraries  to detect changes to the dom
             System.out.println(element);
             // Get name of library and increment count
         }
